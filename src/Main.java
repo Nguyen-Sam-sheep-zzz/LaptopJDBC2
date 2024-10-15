@@ -94,6 +94,7 @@ public class Main {
             }
         }
     }
+
     public void deleteLaptop(int id) {
         ConnectDB connectDB = new ConnectDB();
         Connection connection = connectDB.connectionDB();
