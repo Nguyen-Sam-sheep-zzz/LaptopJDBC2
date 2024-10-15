@@ -1,15 +1,32 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import conrnect.ConnectDB;
+
+import java.sql.*;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        showLaptopList();
+    }
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+    public static void showLaptopList() {
+        ConnectDB connectDB = new ConnectDB();
+        String query = "select * from laptop;";
+        Connection connection;
+        try {
+            connection = connectDB.connectionDB();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                System.out.println("Name: " +
+                        resultSet.getString(2) + ", RAM: " +
+                        resultSet.getString(3) + ", SSD: " +
+                        resultSet.getString(4) + ", chipset: " +
+                        resultSet.getString(5) + ", price: " +
+                        resultSet.getDouble(6) + ", stock: " +
+                        resultSet.getInt(7));
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
