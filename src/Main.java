@@ -113,6 +113,9 @@ public class Main {
             e.printStackTrace();
         }
     }
+    public void stepSis() {
+        System.out.println("help");
+    }
 
 }
 
